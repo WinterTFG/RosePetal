@@ -153,7 +153,7 @@ function TriggerChartUpdates(){
 
 nv.utils.windowResize(TriggerChartUpdates);
 
-$.getJSON('/api/pool_stats', function(data){
+$.getJSON('http://tulipfarm.one/api/pool_stats', function(data){
     statData = data;
     buildChartData();
     displayCharts();

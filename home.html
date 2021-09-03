@@ -1,0 +1,166 @@
+<section class="no-padding-top no-padding-bottom">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="block margin-bottom-sm">
+                    <div class="title"><strong>Pool Info</strong></div>
+                    <div class="table-responsive"> 
+                        <table class="table">
+                          <tbody>
+
+                            <tr>
+                                <td>Min Payout: </td>
+                                <td>1 erg</td>
+                            </tr>
+                            <tr>
+                                <td>Pool fee: </td>
+                                <td>0.7%</td>
+                            </tr>
+                            <tr>
+                                <td>Last block</td>
+                                <td id="last-block">Loading...</td>
+                              </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="block margin-bottom-sm">
+                    <div class="title"><strong>Pool Stats</strong></div>
+                    <div class="table-responsive"> 
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Current block effort: </td>
+                                    <td>Coming soon</td>
+                                </tr>
+                                <tr>
+                                    <td>Workers: </td>
+                                    <td><span id="statsMiners">Loading...</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Pool Hashrate: </td>
+                                    <td><span id="statsHashrate">Loading...</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="block margin-bottom-sm">
+                    <div class="title"><strong>Network Info</strong></div>
+                    <div class="table-responsive"> 
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Network Hashrate: </td>
+                                    <td id="networkHashrate">Loading...</td>
+                                </tr>
+                                <tr>
+                                    <td>Network Difficulty: </td>
+                                    <td id="networkDiff">Loading...</td>
+                                </tr>
+                                <tr>
+                                    <td>Ergo Price: </td>
+                                    <td id="ergoPrice">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="block chart margin-bottom-sm">
+                    <div class="title"><strong>Blocks Mined</strong></div>
+                    <div class="table-responsive"> 
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>24 Hours: </td>
+                                <td id="last-24">Loading...</td>
+                            </tr>
+                            <tr>
+                                <td>7 Days: </td>
+                                <td id="last-7">Loading...</td>
+                            </tr>
+                            <tr>
+                                <td>30 Days: </td>
+                                <td id="last-30">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="block chart margin-bottom-sm">
+                    <div class="title"><strong>Pool hashrate</strong></div>
+                    <div class="chart">
+                        <div class="chartDiv"><svg id="poolHashrate"></svg></div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-lg-12 col-md-12">
+                <div class="block chart margin-bottom-sm">
+                    <div class="title"><strong>Blocks</strong></div>
+                    <div class="chart">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Block</th>
+                                    <th>Date Mined</th>
+                                    <th>Status</th>
+                                    <th>Block Reward</th>
+                                </tr>
+                            </thead>
+                            <tbody id="block-table">
+                                
+                            </tbody>
+                        </table>
+                        <div id="pageination">Block data loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+                <div class="block chart margin-bottom-sm">
+                    <div class="title"><strong>Workers</strong></div>
+                    <div class="table-responsive">
+                        
+                        {{ for(var pool in it.stats.pools) { }}
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Address</th>
+                                        <th>Efficiency</th>
+                                        <th>Hashrate</th>
+                                    </tr>
+                                    </thead>
+                                    {{ for(var worker in it.stats.pools[pool].workers) { }}
+                                    {{var workerstat = it.stats.pools[pool].workers[worker];}}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{=worker}}</td>
+                                            <td>{{? workerstat.shares > 0}} {{=Math.floor(10000 * workerstat.shares / (workerstat.shares + workerstat.invalidshares)) / 100}}% {{??}} 0% {{?}}</td>
+                                            <td>{{=workerstat.hashrateString}}</td>
+                                        </tr>
+                                    </tbody>
+                                    {{ } }}
+                                </table>
+                        {{ } }}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
