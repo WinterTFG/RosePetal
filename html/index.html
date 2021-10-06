@@ -20,235 +20,239 @@
     <script src="/js/stats.js"></script>
     <script src="/js/front.js"></script>
 
-    <link rel="stylesheet" href="/css/nvd3.css">
+    <link rel="stylesheet" href="/css/nvd3.css?v=0.93">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700"-->
-    <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
-    <!--link rel="stylesheet" href="/css/custom.css"-->
+    <link rel="stylesheet" href="/css/style.default.css?v=1.13" id="theme-stylesheet">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="shortcut icon" href="/img/favicon.ico">
 </head>
 <body>
-  <header class="header">
-      <nav class="navbar navbar-expand-lg">
-          <div class="search-panel">
-            <div class="search-inner d-flex align-items-center justify-content-center">
-              <div class="close-btn">Close <i class="fa fa-close"></i></div>
-              <form id="searchForm" action="">
-                <div class="form-group">
-                  <input type="search" name="search" placeholder="Wallet address or worker name...">
-                  <button type="submit" class="submit">Search</button>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <div class="navbar-header hot-swapper">
+                    <a href="/" class="navbar-brand">
+                        <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Tulip</strong><strong>Farm</strong></div>
+                        <div class="brand-text brand-sm"><strong class="text-primary">Tulip</strong><strong>Farm</strong></div>
+                    </a>
                 </div>
-              </form>
+                <div class="right-menu list-inline no-margin-bottom">
+                    <div class="list-inline-item search-bar">
+                        <form action="">
+                            <input type="text" placeholder="Wallet address or worker name..." class="search-box" id="searchBar">
+                            <button type="submit" class="submit search-button" onclick="getInputValue();">
+                                <i class="icon-magnifying-glass-browser"></i>
+                            </button>
+                        </form>
+                        <script>
+                            function getInputValue() {
+                                let inputVal = document.getElementById("searchBar").value;
+                                console.log(inputVal);
+                                let url = window.location.href;
+                                let newUrl = url + "/workers/" + inputVal;
+                                console.log(newUrl);
+                                window.location.href = newUrl;
+                            }
+                        </script>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="container-fluid d-flex align-items-center justify-content-between">
-            <div class="navbar-header hot-swapper">
-              <!-- Navbar Header--><a href="/" class="navbar-brand">
-                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Tulip</strong><strong>Farm</strong></div>
-                <div class="brand-text brand-sm"><strong class="text-primary">Tulip</strong><strong>Farm</strong></div></a>
-              <!-- Sidebar Toggle Btn-->
-              <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+        </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+        <div class="page-content">
+            <div class="page-header">
+                <div class="container-fluid">
+                    <h2 class="h5 no-margin-bottom">Ergo Mining Pool</h2>
+                </div>
             </div>
-            <div class="right-menu list-inline no-margin-bottom">    
-              <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
-            </div>
-          </div>
-      </nav>
-  </header>
-  <div class="d-flex align-items-stretch">
-    <!-- Sidebar Navigation-->
-    <nav id="sidebar">
-      <ul class="list-unstyled pure-menu-selected">
-        <li class="{{? it.selected === 'home' }}pure-menu-selected{{?}}"><a class="hot-swapper" href="/"> <i class="icon-home"></i>Home </a></li>
-        <li class="{{? it.selected === 'howto' }}pure-menu-selected{{?}}"><a class="hot-swapper" href="/howto"> <i class="icon-light-bulb"></i>How to connect </a></li>
-      </ul>
-    </nav>
-    <!-- Sidebar Navigation end-->
-    <div class="page-content">
-      <div class="page-header">
-        <div class="container-fluid">
-            <h2 class="h5 no-margin-bottom">Ergo Mining Pool</h2>
-        </div>
-      </div>
-      
-      <!-- BEGIN MAIN -->
-      <main>
-        <section class="no-padding-top no-padding-bottom">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-lg-4 col-md-6">
-                      <div class="block margin-bottom-sm">
-                          <div class="title"><strong>Pool Info</strong></div>
-                          <div class="table-responsive"> 
-                              <table class="table">
-                                <tbody>
-      
-                                  <tr>
-                                      <td>Min Payout: </td>
-                                      <td>1 erg</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Pool fee: </td>
-                                      <td>0.7%</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Last block</td>
-                                      <td id="last-block">Loading...</td>
-                                    </tr>
-      
-                                </tbody>
-                              </table>
+            
+            <!-- BEGIN MAIN -->
+            <main>
+                <section class="no-padding-top no-padding-bottom">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-6 box">
+                                <div class="block">
+                                    <div class="title"><strong>Pool Info</strong></div>
+                                    <div class="table-responsive"> 
+                                        <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Min Payout: </td>
+                                                <td>1 erg</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pool fee: </td>
+                                                <td>0.7%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Last block</td>
+                                                <td id="last-block">Loading...</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                      </div>
-                  </div>
-      
-                  <div class="col-lg-4 col-md-6">
-                      <div class="block margin-bottom-sm">
-                          <div class="title"><strong>Pool Stats</strong></div>
-                          <div class="table-responsive"> 
-                              <table class="table">
-                                  <tbody>
-                                      <tr>
-                                          <td>Current block effort: </td>
-                                          <td>Coming soon</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Workers: </td>
-                                          <td><span id="statsMiners">Loading...</span></td>
-                                      </tr>
-                                      <tr>
-                                          <td>Pool Hashrate: </td>
-                                          <td><span id="statsHashrate">Loading...</span></td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-      
-                  <div class="col-lg-4 col-md-6">
-                      <div class="block margin-bottom-sm">
-                          <div class="title"><strong>Network Info</strong></div>
-                          <div class="table-responsive"> 
-                              <table class="table">
-                                  <tbody>
-                                      <tr>
-                                          <td>Network Hashrate: </td>
-                                          <td id="networkHashrate">Loading...</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Network Difficulty: </td>
-                                          <td id="networkDiff">Loading...</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Ergo Price: </td>
-                                          <td id="ergoPrice">Loading...</td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-      
-                  <div class="col-lg-4 col-md-6">
-                      <div class="block chart margin-bottom-sm">
-                          <div class="title"><strong>Blocks Mined</strong></div>
-                          <div class="table-responsive"> 
-                              <table class="table">
-                                  <tbody>
-                                  <tr>
-                                      <td>24 Hours: </td>
-                                      <td id="last-24">Loading...</td>
-                                  </tr>
-                                  <tr>
-                                      <td>7 Days: </td>
-                                      <td id="last-7">Loading...</td>
-                                  </tr>
-                                  <tr>
-                                      <td>30 Days: </td>
-                                      <td id="last-30">Loading...</td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-8 col-md-12">
-                      <div class="block chart margin-bottom-sm">
-                          <div class="title"><strong>Pool hashrate</strong></div>
-                          <div class="chart">
-                              <div class="chartDiv"><svg id="poolHashrate"></svg></div>
-                          </div>
-                      </div>
-                  </div>
-              
-                  <div class="col-lg-12 col-md-12">
-                      <div class="block chart margin-bottom-sm">
-                          <div class="title"><strong>Blocks</strong></div>
-                          <div class="chart">
-                              <table class="table">
-                                  <thead>
-                                      <tr>
-                                          <th>Block</th>
-                                          <th>Date Mined</th>
-                                          <th>Status</th>
-                                          <th>Block Reward</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody id="block-table">
-                                      
-                                  </tbody>
-                              </table>
-                              <div id="pageination">Block data loading...</div>
-                          </div>
-                      </div>
-                  </div>
-      
-                    <div class="col-lg-12 col-md-12">
-                        <div class="block chart margin-bottom-sm">
-                            <div class="title"><strong>Workers</strong></div>
-                                <div class="table-responsive" id=miners>
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>Address</th>
-                                            <th>Efficiency</th>
-                                            <th>Hashrate</th>
-                                        </tr>
-                                        </thead>
-                                            <tbody>                                        
+                
+                            <div class="col-lg-4 col-md-6 box">
+                                <div class="block">
+                                    <div class="title"><strong>Pool Stats</strong></div>
+                                    <div class="table-responsive"> 
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Current block effort: </td>
+                                                    <td>Coming soon</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Workers: </td>
+                                                    <td><span id="statsMiners">Loading...</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pool Hashrate: </td>
+                                                    <td><span id="statsHashrate">Loading...</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="col-lg-4 col-md-6 box">
+                                <div class="block">
+                                    <div class="title"><strong>Network Info</strong></div>
+                                    <div class="table-responsive"> 
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Network Hashrate: </td>
+                                                    <td id="networkHashrate">Loading...</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Network Difficulty: </td>
+                                                    <td id="networkDiff">Loading...</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ergo Price: </td>
+                                                    <td id="ergoPrice">Loading...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="col-lg-4 col-md-6 box">
+                                <div class="block chart">
+                                    <div class="title"><strong>Blocks Mined</strong></div>
+                                    <div class="table-responsive"> 
+                                        <table class="table">
+                                            <tbody>
+                                            <tr>
+                                                <td>24 Hours: </td>
+                                                <td id="last-24">Loading...</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7 Days: </td>
+                                                <td id="last-7">Loading...</td>
+                                            </tr>
+                                            <tr>
+                                                <td>30 Days: </td>
+                                                <td id="last-30">Loading...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8 col-md-12 box">
+                                <div class="block chart">
+                                    <div class="title"><strong>Pool hashrate</strong></div>
+                                    <div class="chart">
+                                        <div class="chartDiv"><svg id="poolHashrate"></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-12 box">
+                                <div class="block">
+                                    <div class="title"><strong>How to Connect</strong></div>
+                                    <div class="table-responsive"> 
+                                        <p>You can connect to our server using any software that works with Ergo. T-Rex Miner will allow you to overclock within the software, or you can use NBminer with MSI afterburner for NVidia cards. AMD works great with TeamRedMiner</p>
+                                        <p>Server: stratum+tcp://tulipfarm.one:8008</p>
+                                        <p>No password is used, just put your wallet address and an optional worker name. Follow the examples in the software you choose. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-lg-6 col-md-12 box">
+                                <div class="block chart">
+                                    <div class="title"><strong>Blocks</strong></div>
+                                    <div class="chart">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Block</th>
+                                                    <th>Date Mined</th>
+                                                    <th>Status</th>
+                                                    <th>Block Reward</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="block-table">
+                                                
+                                            </tbody>
+                                        </table>
+                                        <div id="pageination">Block data loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="col-lg-12 col-md-12 box last-box">
+                                <div class="block chart">
+                                    <div class="title"><strong>Workers</strong></div>
+                                    <div class="table-responsive" id="miners">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Address</th>
+                                                    <th>Hashrate</th>
+                                                    <th>Efficiency</th>
+                                                </tr>
+                                            </thead>        
+                                            <tbody>
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
+                            </div>
 
                         </div>
                     </div>
+                </section>
+            </main> 
+            <!-- END MAIN -->
+
+            <footer class="footer">
+                <div class="footer__block block no-margin-bottom">
+                    <div class="container-fluid text-center">
+                        <p class="no-margin-bottom">2021 &copy; Tulip Farm.</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-      
-      </section>
-      
-      </main>
-      <!-- END MAIN -->
+            </footer>
 
-      <footer class="footer">
-        <div class="footer__block block no-margin-bottom">
-          <div class="container-fluid text-center">
-              <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-              <p class="no-margin-bottom">2021 &copy; Tulip Farm. Website theme design by <a href="https://bootstrapious.com/p/bootstrap-4-dark-admin">Bootstrapious</a>.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
-
+        </div><!-- close .page-content -->
+    </div><!-- close .d-flex-->
 </body>
 </html>
