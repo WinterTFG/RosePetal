@@ -1,1 +1,49 @@
-/* your styles go here */
+.box {
+    margin-bottom: 30px;
+  }
+  
+  .block {
+      height: 100%;
+  }
+  
+  .search-bar {
+    float: right;
+  }
+  .search-box {
+    padding: 6px;
+    margin-right: 16px;
+    border: none;
+    font-size: 17px;
+    background: #22252a;
+    color: #dddddd;
+    width: 400px;
+  }
+  .search-button {
+    border: none;
+    background: none;
+    color: #dddddd;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .navbar {
+        padding: 10px 20px 0;
+    }
+    .right-menu {
+        width: 100%;
+    }
+    .search-bar {
+        float: left;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .search-box {
+        float: left;
+        width: 100%;
+    }
+    .search-button {
+        display: none;
+    }
+  }
